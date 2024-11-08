@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-// namespace App\Http\Controllers\User;
 use App\Models\User;
 
 class AuthController extends Controller
 {
-    //
-    // Fungsi untuk registrasi pengguna baru
+    /**
+     * Fungsi untuk registrasi pengguna baru.
+     * Peran 'mahasiswa' akan ditetapkan secara otomatis.
+     */
     public function register(Request $request)
     {
         // Validasi input
@@ -20,11 +21,12 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        // Membuat user baru
+        // Membuat user baru dengan peran 'mahasiswa' secara otomatis
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),  // Hash password
+            'password' => Hash::make($request->password), // Hash password
+            'role' => 'mahasiswa', // Set peran otomatis sebagai 'mahasiswa'
         ]);
 
         // Membuat token autentikasi
@@ -34,7 +36,10 @@ class AuthController extends Controller
         return response()->json(['token' => $token], 201);
     }
 
-    // Fungsi untuk login
+    /**
+     * Fungsi untuk login.
+     * Jika kredensial valid, mengembalikan token autentikasi.
+     */
     public function login(Request $request)
     {
         // Validasi input
@@ -57,7 +62,4 @@ class AuthController extends Controller
         // Mengembalikan token
         return response()->json(['token' => $token], 200);
     }
-
-
-
 }

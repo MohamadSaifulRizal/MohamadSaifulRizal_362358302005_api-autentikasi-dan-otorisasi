@@ -5,23 +5,22 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MahasiswaController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Grup middleware auth:sanctum untuk autentikasi
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('mahasiswas', MahasiswaController::class);
+    // Rute hanya untuk admin
+    Route::middleware('admin')->group(function () {
+        // Semua operasi CRUD di MahasiswaController untuk admin
+        Route::apiResource('mahasiswas', MahasiswaController::class);
+    });
+
+    // Rute hanya untuk mahasiswa (akses baca saja)
+    Route::middleware('mahasiswa')->group(function () {
+        // Hanya operasi GET di MahasiswaController untuk mahasiswa
+        Route::get('mahasiswas', [MahasiswaController::class, 'index']);
+        Route::get('mahasiswas/{id}', [MahasiswaController::class, 'show']);
+    });
 });
 
+// Rute untuk registrasi dan login (tanpa autentikasi)
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
