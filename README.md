@@ -70,3 +70,13 @@ Mohamad Saiful Rizal
 362358302005
 
 Teknologi Rekayasa Perangkat Lunak 2A
+
+![Screenshot 2024-11-06 211423](https://github.com/user-attachments/assets/9b576c07-a1cc-4779-8987-5b2f366e38f3)
+
+![image](https://github.com/user-attachments/assets/76545422-5c70-49ca-99e8-0b33b33fd0a0)
+
+Mahasiswa register dan login:
+
+![Screenshot 2024-11-08 124216](https://github.com/user-attachments/assets/6cdab24e-0966-4334-8c77-1ae094e3081a)
+
+![Screenshot 2024-11-08 124637](https://github.com/user-attachments/assets/18f98d26-607a-4a41-822c-00cd4f9d8a66)
